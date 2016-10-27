@@ -3,6 +3,18 @@
 #include <vector>
 
 #define DICTIONARY_SIZE 5
+#define ALPHABET std::map<char, pair<int,int> >
+#define PAIR(a,b) std::make_pair(a,b)
+
+ALPHABET alphabet = { {'a', PAIR(2,1)}, {'q', PAIR(0,1)}, {'w', PAIR(0,2)},
+                      {'e', PAIR(0,3)}, {'r', PAIR(0,4)}, {'t', PAIR(0,5)},
+                      {'y', PAIR(0,6)}, {'u', PAIR(0,7)}, {'i', PAIR(0,8)},
+                      {'o', PAIR(0,9)}, {'p', PAIR(0,10)}, {'s', PAIR(2,2)},
+                      {'d', PAIR(2,3)}, {'f', PAIR(2,4)}, {'g', PAIR(2,5)},
+                      {'h', PAIR(2,6)}, {'j', PAIR(2,7)}, {'k', PAIR(2,8)},
+                      {'l', PAIR(2,9)}, {'z', PAIR(4,1)}, {'x', PAIR(4,2)},
+                      {'c', PAIR(4,3)}, {'v', PAIR(4,4)}, {'b', PAIR(4,5)},
+                      {'n', PAIR(4,6)}, {'m', PAIR(4,7)}, };
 
 int pwd(int i, int j)
 {
