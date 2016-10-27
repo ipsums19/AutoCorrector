@@ -18,54 +18,33 @@ ALPHABET alphabet = { {'a', PAIR(2,1)}, {'q', PAIR(0,1)}, {'w', PAIR(0,2)},
                       {'n', PAIR(4,6)}, {'m', PAIR(4,7)}
                     };
 
-int pwd(int i, int j)
+
+int abs(int a, int b)
 {
-    int sum = 1;
-    for(int k = 0; k < j; ++k)
-        sum *= i;
+    return a > b? a - b : b - a;
+}
+
+int difw(std::string &w1, std::string &w2)
+{
+    if(w1.size() != w2.size()) return 100;
+
+    int sum = 0;
+    for(int i = 0; i < w1.size(); ++i)
+    {
+        sum += abs(alphabet[w1[i]].first - alphabet[w2[i]].first);
+        sum += abs(alphabet[w1[i]].second - alphabet[w2[i]].second);
+    }
     return sum;
 }
 
-int getWeight(std::string s)
-{
-    int weight = 0;
-    for(int i = 0; i < s.size(); ++i)
-    {
-        weight += pwd(100,i)*(int) s[i] - 'a';
-    }
-    std::cout << s << " = " << weight <<std::endl;
-    return weight;
-}
-
-std::vector<int> setWeight(std::string dic[])
-{
-    std::vector<int> weights(DICTIONARY_SIZE);
-    for(int i = 0; i < DICTIONARY_SIZE; ++i)
-    {
-        weights[i] = getWeight(dic[i]);
-    }
-    return weights;
-}
-
-
-int difw(int w1, int w2)
-{
-    return w1 < w2 ?  w2 - w1 : w1 - w2;
-}
-
-int autocorrect(std::vector<int> dic, std::string correct)
+int autocorrect(std::vector<std::string> &dic, std::string correct)
 {
     int min, pos;
     pos = 0;
-    int weight = getWeight(correct);
-    for(int i = 0; i < DICTIONARY_SIZE; ++i)
-    {
-        std::cout << i << " = " << dic[i] << std::endl;
-    }
-    min = difw(weight, dic[0]);
+    min = difw(correct, dic[0]);
     for(int i = 1; i < DICTIONARY_SIZE; ++i)
     {
-        int diff = difw(weight, dic[i]);
+        int diff = difw(correct, dic[i]);
         if(diff < min)
         {
             pos = i;
@@ -77,11 +56,10 @@ int autocorrect(std::vector<int> dic, std::string correct)
 
 int main()
 {
-    std::string dic[DICTIONARY_SIZE] = {"hi", "hello", "good", "bye", "no"};
-    std::vector<int> dicWeight = setWeight(dic);
+    std::vector<std::string> dic = {"hi", "hello", "good", "bye", "no"};
     std::string correct;
     while(std::cin >> correct)
     {
-        std::cout << dic[autocorrect(dicWeight, correct)] << std::endl;
+        std::cout << dic[autocorrect(dic, correct)] << std::endl;
     }
 }
