@@ -8,9 +8,7 @@ int pwd(int i, int j)
 {
     int sum = 1;
     for(int k = 0; k < j; ++k)
-    {
         sum *= i;
-    }
     return sum;
 }
 
@@ -54,9 +52,6 @@ int autocorrect(std::vector<int> dic, std::string correct)
     for(int i = 1; i < DICTIONARY_SIZE; ++i)
     {
         int diff = difw(weight, dic[i]);
-        //std::cout << "diff = " << diff <<std::endl;
-        //std::cout << "word = " << dic[i] <<std::endl;
-        //std::cout << std::endl;
         if(diff < min)
         {
             pos = i;
